@@ -150,6 +150,14 @@ trait TypeContext<'a> {
     where
         Self: std::marker::Sized;
 
+    #[cfg(test)]
+    fn serialize_bank_and_storage_without_extra_fields<S: serde::ser::Serializer>(
+        serializer: S,
+        serializable_bank: &SerializableBankAndStorageNoExtra<'a, Self>,
+    ) -> std::result::Result<S::Ok, S::Error>
+    where
+        Self: std::marker::Sized;
+
     fn serialize_accounts_db_fields<S: serde::ser::Serializer>(
         serializer: S,
         serializable_db: &SerializableAccountsDb<'a, Self>,
@@ -285,6 +293,91 @@ where
     })
 }
 
+<<<<<<< HEAD
+=======
+#[cfg(test)]
+pub(crate) fn bank_to_stream_no_extra_fields<W>(
+    serde_style: SerdeStyle,
+    stream: &mut BufWriter<W>,
+    bank: &Bank,
+    snapshot_storages: &[SnapshotStorage],
+) -> Result<(), Error>
+where
+    W: Write,
+{
+    macro_rules! INTO {
+        ($style:ident) => {
+            bincode::serialize_into(
+                stream,
+                &SerializableBankAndStorageNoExtra::<$style::Context> {
+                    bank,
+                    snapshot_storages,
+                    phantom: std::marker::PhantomData::default(),
+                },
+            )
+        };
+    }
+    match serde_style {
+        SerdeStyle::Newer => INTO!(newer),
+    }
+    .map_err(|err| {
+        warn!("bankrc_to_stream error: {:?}", err);
+        err
+    })
+}
+
+/// deserialize the bank from 'stream_reader'
+/// modify the accounts_hash
+/// reserialize the bank to 'stream_writer'
+fn reserialize_bank_fields_with_new_hash<W, R>(
+    stream_reader: &mut BufReader<R>,
+    stream_writer: &mut BufWriter<W>,
+    accounts_hash: &Hash,
+) -> Result<(), Error>
+where
+    W: Write,
+    R: Read,
+{
+    newer::Context::reserialize_bank_fields_with_hash(stream_reader, stream_writer, accounts_hash)
+}
+
+/// effectively updates the accounts hash in the serialized bank file on disk
+/// read serialized bank from pre file
+/// update accounts_hash
+/// write serialized bank to post file
+/// return true if pre file found
+pub fn reserialize_bank_with_new_accounts_hash(
+    bank_snapshots_dir: impl AsRef<Path>,
+    slot: Slot,
+    accounts_hash: &Hash,
+) -> bool {
+    let bank_post = snapshot_utils::get_bank_snapshots_dir(bank_snapshots_dir, slot);
+    let bank_post = bank_post.join(snapshot_utils::get_snapshot_file_name(slot));
+    let mut bank_pre = bank_post.clone();
+    bank_pre.set_extension(BANK_SNAPSHOT_PRE_FILENAME_EXTENSION);
+
+    let mut found = false;
+    {
+        let file = std::fs::File::open(&bank_pre);
+        // some tests don't create the file
+        if let Ok(file) = file {
+            found = true;
+            let file_out = std::fs::File::create(bank_post).unwrap();
+            reserialize_bank_fields_with_new_hash(
+                &mut BufReader::new(file),
+                &mut BufWriter::new(file_out),
+                accounts_hash,
+            )
+            .unwrap();
+        }
+    }
+    if found {
+        std::fs::remove_file(bank_pre).unwrap();
+    }
+    found
+}
+
+>>>>>>> 8caced68c (Serialize lamports per signature (#25364))
 struct SerializableBankAndStorage<'a, C> {
     bank: &'a Bank,
     snapshot_storages: &'a [SnapshotStorage],
@@ -297,6 +390,39 @@ impl<'a, C: TypeContext<'a>> Serialize for SerializableBankAndStorage<'a, C> {
         S: serde::ser::Serializer,
     {
         C::serialize_bank_and_storage(serializer, self)
+    }
+}
+
+#[cfg(test)]
+struct SerializableBankAndStorageNoExtra<'a, C> {
+    bank: &'a Bank,
+    snapshot_storages: &'a [SnapshotStorage],
+    phantom: std::marker::PhantomData<C>,
+}
+
+#[cfg(test)]
+impl<'a, C: TypeContext<'a>> Serialize for SerializableBankAndStorageNoExtra<'a, C> {
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        C::serialize_bank_and_storage_without_extra_fields(serializer, self)
+    }
+}
+
+#[cfg(test)]
+impl<'a, C> From<SerializableBankAndStorageNoExtra<'a, C>> for SerializableBankAndStorage<'a, C> {
+    fn from(s: SerializableBankAndStorageNoExtra<'a, C>) -> SerializableBankAndStorage<'a, C> {
+        let SerializableBankAndStorageNoExtra {
+            bank,
+            snapshot_storages,
+            phantom,
+        } = s;
+        SerializableBankAndStorage {
+            bank,
+            snapshot_storages,
+            phantom,
+        }
     }
 }
 
