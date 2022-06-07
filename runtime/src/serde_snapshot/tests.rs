@@ -4,12 +4,8 @@ use {
     crate::{
         accounts::{create_test_accounts, Accounts},
         accounts_db::{get_temp_accounts_paths, AccountShrinkThreshold},
-<<<<<<< HEAD
         bank::{Bank, StatusCacheRc},
-=======
-        bank::{Bank, Rewrites, StatusCacheRc},
         genesis_utils::{activate_all_features, activate_feature},
->>>>>>> 8caced68c (Serialize lamports per signature (#25364))
         hardened_unpack::UnpackedAppendVecMap,
         snapshot_utils::ArchiveFormat,
     },
@@ -491,11 +487,7 @@ mod test_bank_serialize {
 
     // This some what long test harness is required to freeze the ABI of
     // Bank's serialization due to versioned nature
-<<<<<<< HEAD
-    #[frozen_abi(digest = "ERbJJzaQD39td9tiE4FPAud374S2Hvk6pvsxejm6quWf")]
-=======
     #[frozen_abi(digest = "9vGBt7YfymKUTPWLHVVpQbDtPD7dFDwXRMFkCzwujNqJ")]
->>>>>>> 8caced68c (Serialize lamports per signature (#25364))
     #[derive(Serialize, AbiExample)]
     pub struct BankAbiTestWrapperNewer {
         #[serde(serialize_with = "wrapper_newer")]
