@@ -9,12 +9,14 @@ export function AssociatedTokenDetailsCard({
   result,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: ParsedInstruction;
   index: number;
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const info = ix.parsed.info;
   return (
@@ -25,6 +27,7 @@ export function AssociatedTokenDetailsCard({
       title="Associated Token Program: Create"
       innerCards={innerCards}
       childIndex={childIndex}
+      readable={readable}
     >
       <tr>
         <td>Program</td>

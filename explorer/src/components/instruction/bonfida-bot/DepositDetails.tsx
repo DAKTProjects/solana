@@ -11,11 +11,13 @@ export function DepositDetailsCard(props: {
   info: Deposit;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, childIndex , readable} = props;
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

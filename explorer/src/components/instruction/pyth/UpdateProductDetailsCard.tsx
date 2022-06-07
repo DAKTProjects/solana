@@ -12,6 +12,7 @@ export default function UpdateProductDetailsCard({
   info,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: TransactionInstruction;
   index: number;
@@ -19,6 +20,7 @@ export default function UpdateProductDetailsCard({
   info: UpdateProductParams;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const attrsJSON = JSON.stringify(
     Object.fromEntries(info.attributes),
@@ -36,6 +38,7 @@ export default function UpdateProductDetailsCard({
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

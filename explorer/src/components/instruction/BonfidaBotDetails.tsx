@@ -30,8 +30,9 @@ export function BonfidaBotDetailsCard(props: {
   signature: string;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, signature, innerCards, childIndex } = props;
+  const { ix, index, result, signature, innerCards, childIndex, readable} = props;
 
   const { url } = useCluster();
 
@@ -86,6 +87,7 @@ export function BonfidaBotDetailsCard(props: {
       title={`Bonfida Bot: ${title || "Unknown"}`}
       innerCards={innerCards}
       childIndex={childIndex}
+      readable={readable}
       defaultRaw
     />
   );

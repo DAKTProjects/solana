@@ -15,12 +15,14 @@ export function NonceInitializeDetailsCard(props: {
   info: InitializeNonceInfo;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { readable, ix, index, result, info, innerCards, childIndex } = props;
 
   return (
     <InstructionCard
       ix={ix}
+    readable={readable}
       index={index}
       result={result}
       title="System Program: Initialize Nonce"

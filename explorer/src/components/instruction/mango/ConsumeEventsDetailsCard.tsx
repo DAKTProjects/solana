@@ -9,8 +9,9 @@ export function ConsumeEventsDetailsCard(props: {
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, innerCards, childIndex } = props;
+  const { readable, ix, index, result, innerCards, childIndex } = props;
 
   const perpMarketAccountMeta = ix.keys[2];
   const mangoPerpMarketConfig = getPerpMarketFromInstruction(
@@ -20,6 +21,7 @@ export function ConsumeEventsDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

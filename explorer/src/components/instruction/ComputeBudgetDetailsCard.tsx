@@ -17,6 +17,7 @@ export function ComputeBudgetDetailsCard({
   signature,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: TransactionInstruction;
   index: number;
@@ -24,6 +25,7 @@ export function ComputeBudgetDetailsCard({
   signature: string;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const { url } = useCluster();
   try {
@@ -34,6 +36,7 @@ export function ComputeBudgetDetailsCard({
           ComputeBudgetInstruction.decodeRequestUnits(ix);
         return (
           <InstructionCard
+          readable={readable}
             ix={ix}
             index={index}
             result={result}
@@ -68,6 +71,7 @@ export function ComputeBudgetDetailsCard({
         const { bytes } = ComputeBudgetInstruction.decodeRequestHeapFrame(ix);
         return (
           <InstructionCard
+          readable={readable}
             ix={ix}
             index={index}
             result={result}
@@ -96,6 +100,7 @@ export function ComputeBudgetDetailsCard({
           ComputeBudgetInstruction.decodeSetComputeUnitLimit(ix);
         return (
           <InstructionCard
+          readable={readable}
             ix={ix}
             index={index}
             result={result}
@@ -124,6 +129,7 @@ export function ComputeBudgetDetailsCard({
           ComputeBudgetInstruction.decodeSetComputeUnitPrice(ix);
         return (
           <InstructionCard
+          readable={readable}
             ix={ix}
             index={index}
             result={result}
@@ -157,6 +163,7 @@ export function ComputeBudgetDetailsCard({
 
   return (
     <InstructionCard
+          readable={readable}
       ix={ix}
       index={index}
       result={result}

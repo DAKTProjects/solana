@@ -10,8 +10,9 @@ export function CancelSpotOrderDetailsCard(props: {
   info: CancelSpotOrder;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, childIndex, readable} = props;
   const mangoAccount = ix.keys[2];
   const spotMarketAccountMeta = ix.keys[4];
   const mangoSpotMarketConfig = getSpotMarketFromInstruction(
@@ -21,6 +22,7 @@ export function CancelSpotOrderDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

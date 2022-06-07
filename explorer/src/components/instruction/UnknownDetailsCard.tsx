@@ -14,17 +14,20 @@ export function UnknownDetailsCard({
   result,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: TransactionInstruction | ParsedInstruction;
   index: number;
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const { cluster } = useCluster();
   const programName = getProgramName(ix.programId.toBase58(), cluster);
   return (
     <InstructionCard
+      readable={readable}
       ix={ix}
       index={index}
       result={result}

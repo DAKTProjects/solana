@@ -11,6 +11,7 @@ export default function UpdatePriceDetailsCard({
   info,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: TransactionInstruction;
   index: number;
@@ -18,9 +19,11 @@ export default function UpdatePriceDetailsCard({
   info: UpdatePriceParams;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

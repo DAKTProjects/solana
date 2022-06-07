@@ -10,8 +10,9 @@ export function CancelPerpOrderDetailsCard(props: {
   info: CancelPerpOrder;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, readable, childIndex } = props;
   const mangoAccount = ix.keys[1];
   const perpMarketAccountMeta = ix.keys[3];
   const mangoPerpMarketConfig = getPerpMarketFromInstruction(
@@ -21,6 +22,7 @@ export function CancelPerpOrderDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

@@ -7,11 +7,13 @@ export function AddOracleDetailsCard(props: {
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, innerCards, childIndex } = props;
+  const { ix, index, result, innerCards, childIndex, readable } = props;
 
   return (
     <InstructionCard
+      readable={readable}
       ix={ix}
       index={index}
       result={result}

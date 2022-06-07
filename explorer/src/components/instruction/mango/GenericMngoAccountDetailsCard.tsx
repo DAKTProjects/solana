@@ -10,8 +10,10 @@ export function GenericMngoAccountDetailsCard(props: {
   title: String;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const {
+    readable,
     ix,
     index,
     result,
@@ -24,6 +26,7 @@ export function GenericMngoAccountDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

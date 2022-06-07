@@ -12,6 +12,7 @@ export function GenericPerpMngoDetailsCard(props: {
   title: String;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const {
     ix,
@@ -22,6 +23,7 @@ export function GenericPerpMngoDetailsCard(props: {
     title,
     innerCards,
     childIndex,
+    readable,
   } = props;
   const mangoAccount = ix.keys[mangoAccountKeyLocation];
   const perpMarketAccountMeta = ix.keys[perpMarketKeyLocation];
@@ -32,6 +34,7 @@ export function GenericPerpMngoDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

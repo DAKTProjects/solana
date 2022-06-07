@@ -11,8 +11,9 @@ export function SettleFundsDetailsCard(props: {
   info: SettleFunds;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, childIndex, readable } = props;
   return (
     <InstructionCard
       ix={ix}
@@ -21,6 +22,7 @@ export function SettleFundsDetailsCard(props: {
       title="Bonfida Bot: Settle Funds"
       innerCards={innerCards}
       childIndex={childIndex}
+      readable={readable}
     >
       <tr>
         <td>Program</td>
