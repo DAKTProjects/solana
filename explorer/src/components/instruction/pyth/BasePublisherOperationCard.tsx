@@ -12,6 +12,7 @@ export default function BasePublisherOperationCard({
   info,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: TransactionInstruction;
   index: number;
@@ -20,9 +21,11 @@ export default function BasePublisherOperationCard({
   info: BasePublisherOperationParams;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

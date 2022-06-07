@@ -18,8 +18,9 @@ export function PlaceSpotOrderDetailsCard(props: {
   info: PlaceSpotOrder;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { readable, ix, index, result, info, innerCards, childIndex } = props;
   const mangoAccount = ix.keys[1];
   const spotMarketAccountMeta = ix.keys[5];
   const mangoSpotMarketConfig = getSpotMarketFromInstruction(
@@ -65,6 +66,7 @@ export function PlaceSpotOrderDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

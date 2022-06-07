@@ -15,12 +15,14 @@ export function CreateOrderDetailsCard(props: {
   info: CreateOrder;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any,
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, childIndex, readable } = props;
   console.log("Test");
   return (
     <InstructionCard
       ix={ix}
+      readable={readable}
       index={index}
       result={result}
       title="Bonfida Bot: Create Order"

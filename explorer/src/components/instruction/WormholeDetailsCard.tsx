@@ -12,6 +12,7 @@ export function WormholeDetailsCard({
   signature,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: TransactionInstruction;
   index: number;
@@ -19,6 +20,7 @@ export function WormholeDetailsCard({
   signature: string;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const { url } = useCluster();
 
@@ -34,6 +36,7 @@ export function WormholeDetailsCard({
 
   return (
     <InstructionCard
+      readable={readable}
       ix={ix}
       index={index}
       result={result}

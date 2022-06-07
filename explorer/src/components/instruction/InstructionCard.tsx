@@ -24,6 +24,7 @@ type InstructionProps = {
   defaultRaw?: boolean;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 };
 
 export function InstructionCard({
@@ -35,6 +36,7 @@ export function InstructionCard({
   defaultRaw,
   innerCards,
   childIndex,
+  readable,
 }: InstructionProps) {
   const [resultClass] = ixResult(result, index);
   const [showRaw, setShowRaw] = React.useState(defaultRaw || false);
@@ -45,7 +47,7 @@ export function InstructionCard({
   if (rawDetails && childIndex === undefined) {
     raw = rawDetails?.data?.raw?.transaction.instructions[index];
   }
-
+  console.log(readable.description);
   const fetchRaw = useFetchRawTransaction();
   const fetchRawTrigger = () => fetchRaw(signature);
 

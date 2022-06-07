@@ -56,6 +56,7 @@ export type InstructionDetailsProps = {
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 };
 
 export function InstructionsSection({ signature }: SignatureProps) {
@@ -71,7 +72,6 @@ export function InstructionsSection({ signature }: SignatureProps) {
   }
   const { meta } = details.data.transaction;
   const { transaction } = details.data?.transaction;
-
   if (transaction.message.instructions.length === 0) {
     return <ErrorCard retry={refreshDetails} text="No instructions found" />;
   }
@@ -180,6 +180,7 @@ function InstructionCard({
       innerCards,
       childIndex,
       key,
+      readable: (ix as any).readable,
     };
 
     switch (ix.program) {
@@ -222,6 +223,7 @@ function InstructionCard({
     signature,
     innerCards,
     childIndex,
+    readable: (ix as any).readable,
   };
 
   if (isBonfidaBotInstruction(transactionIx)) {

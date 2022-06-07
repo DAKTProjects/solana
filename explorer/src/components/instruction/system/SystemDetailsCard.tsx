@@ -43,6 +43,7 @@ type DetailsProps = {
   index: number;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 };
 
 export function SystemDetailsCard(props: DetailsProps) {

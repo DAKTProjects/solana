@@ -33,6 +33,7 @@ type DetailsProps = {
   index: number;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 };
 
 export function StakeDetailsCard(props: DetailsProps) {

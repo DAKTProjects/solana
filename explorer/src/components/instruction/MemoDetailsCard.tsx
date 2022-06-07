@@ -10,16 +10,19 @@ export function MemoDetailsCard({
   result,
   innerCards,
   childIndex,
+  readable,
 }: {
   ix: ParsedInstruction;
   index: number;
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const data = wrap(ix.parsed, 50);
   return (
     <InstructionCard
+      readable={readable}
       ix={ix}
       index={index}
       result={result}

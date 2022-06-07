@@ -11,8 +11,9 @@ export function RedeemDetailsCard(props: {
   info: Redeem;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, childIndex, readable } = props;
 
   return (
     <InstructionCard
@@ -22,6 +23,7 @@ export function RedeemDetailsCard(props: {
       title="Bonfida Bot: Redeem"
       innerCards={innerCards}
       childIndex={childIndex}
+      readable={readable}
     >
       <tr>
         <td>Program</td>

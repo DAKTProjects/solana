@@ -27,6 +27,7 @@ type DetailsProps = {
   result: SignatureResult;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 };
 
 export function BpfUpgradeableLoaderDetailsCard(props: DetailsProps) {

@@ -21,9 +21,10 @@ export function PythDetailsCard(props: {
   signature: string;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
   const { url } = useCluster();
-  const { ix, index, result, signature, innerCards, childIndex } = props;
+  const { ix, index, result, signature, innerCards, childIndex, readable } = props;
 
   try {
     let ixType = PythInstruction.decodeInstructionType(ix);
@@ -111,6 +112,7 @@ export function PythDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

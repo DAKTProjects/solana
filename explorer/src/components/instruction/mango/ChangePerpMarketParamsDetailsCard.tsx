@@ -16,8 +16,9 @@ export function ChangePerpMarketParamsDetailsCard(props: {
   info: ChangePerpMarketParams;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, readable, info, innerCards, childIndex } = props;
 
   const perpMarketAccountMeta = ix.keys[1];
   const mangoPerpMarketConfig = getPerpMarketFromInstruction(
@@ -49,6 +50,7 @@ export function ChangePerpMarketParamsDetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

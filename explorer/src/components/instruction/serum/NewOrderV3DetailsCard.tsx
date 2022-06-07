@@ -11,12 +11,14 @@ export function NewOrderV3DetailsCard(props: {
   info: NewOrderV3;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const {  readable, ix, index, result, info, innerCards, childIndex } = props;
 
   return (
     <InstructionCard
       ix={ix}
+    readable={readable}
       index={index}
       result={result}
       title="Serum Program: New Order v3"

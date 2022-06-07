@@ -11,8 +11,9 @@ export function InitializeBotDetailsCard(props: {
   info: InitializeBot;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { ix, index, result, info, innerCards, childIndex, readable } = props;
 
   return (
     <InstructionCard
@@ -22,6 +23,7 @@ export function InitializeBotDetailsCard(props: {
       title="Bonfida Bot: Initialize Bot"
       innerCards={innerCards}
       childIndex={childIndex}
+      readable={readable}
     >
       <tr>
         <td>Program</td>

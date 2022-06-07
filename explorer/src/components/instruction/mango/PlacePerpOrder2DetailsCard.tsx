@@ -18,8 +18,9 @@ export function PlacePerpOrder2DetailsCard(props: {
   info: PlacePerpOrder2;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { readable, ix, index, result, info, innerCards, childIndex } = props;
   const mangoAccount = ix.keys[1];
   const perpMarketAccountMeta = ix.keys[4];
   const mangoPerpMarketConfig = getPerpMarketFromInstruction(
@@ -55,6 +56,7 @@ export function PlacePerpOrder2DetailsCard(props: {
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

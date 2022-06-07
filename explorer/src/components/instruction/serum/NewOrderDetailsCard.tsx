@@ -11,11 +11,13 @@ export function NewOrderDetailsCard(props: {
   info: NewOrder;
   innerCards?: JSX.Element[];
   childIndex?: number;
+  readable: any;
 }) {
-  const { ix, index, result, info, innerCards, childIndex } = props;
+  const { readable,  ix, index, result, info, innerCards, childIndex } = props;
 
   return (
     <InstructionCard
+    readable={readable}
       ix={ix}
       index={index}
       result={result}

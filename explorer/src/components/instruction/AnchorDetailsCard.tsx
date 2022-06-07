@@ -26,6 +26,7 @@ export default function AnchorDetailsCard(props: {
   innerCards?: JSX.Element[];
   childIndex?: number;
   anchorProgram: Program<Idl>;
+  readable: any,
 }) {
   const { ix, anchorProgram } = props;
   const programName = getAnchorProgramName(anchorProgram) ?? "Unknown Program";
