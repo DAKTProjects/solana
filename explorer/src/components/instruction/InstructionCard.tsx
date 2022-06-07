@@ -47,7 +47,6 @@ export function InstructionCard({
   if (rawDetails && childIndex === undefined) {
     raw = rawDetails?.data?.raw?.transaction.instructions[index];
   }
-  console.log(readable.description);
   const fetchRaw = useFetchRawTransaction();
   const fetchRawTrigger = () => fetchRaw(signature);
 
@@ -71,7 +70,7 @@ export function InstructionCard({
             #{index + 1}
             {childIndex !== undefined ? `.${childIndex + 1}` : ""}
           </span>
-          {title}
+          {readable.description}
         </h3>
 
         <button
