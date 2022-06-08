@@ -56,7 +56,13 @@ export function clusterName(cluster: Cluster): string {
   }
 }
 
-export const MAINNET_BETA_URL = 'https://api.solfinder.xyz/'
+export let MAINNET_BETA_URL: string;
+if (process.env["NODE_ENV"] === 'development') {
+  MAINNET_BETA_URL = 'http://localhost:3000';
+} else {
+  MAINNET_BETA_URL = 'https://api.solfinder.xyz/';
+}
+
 export const TESTNET_URL = clusterApiUrl("testnet");
 export const DEVNET_URL = clusterApiUrl("devnet");
 

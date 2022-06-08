@@ -70,7 +70,7 @@ export function InstructionCard({
             #{index + 1}
             {childIndex !== undefined ? `.${childIndex + 1}` : ""}
           </span>
-          {readable.description}
+          {readable.description || title}
         </h3>
 
         <button
