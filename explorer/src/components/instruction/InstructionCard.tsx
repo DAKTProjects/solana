@@ -70,7 +70,7 @@ export function InstructionCard({
             #{index + 1}
             {childIndex !== undefined ? `.${childIndex + 1}` : ""}
           </span>
-          {readable.description || title}
+          {title}
         </h3>
 
         <button
@@ -84,6 +84,13 @@ export function InstructionCard({
           Raw
         </button>
       </div>
+      { (readable.description !== '') && 
+        <div className="card-header">
+          <h5 className="card-sub-header-title">
+            { readable.description }
+          </h5>
+        </div>
+      }
       <div className="table-responsive mb-0">
         <table className="table table-sm table-nowrap card-table">
           <tbody className="list">
