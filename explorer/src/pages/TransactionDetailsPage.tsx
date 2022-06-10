@@ -361,7 +361,7 @@ function DetailsSection({ signature }: SignatureProps) {
   } else if (details.status === FetchStatus.FetchFailed) {
     return <ErrorCard retry={refreshDetails} text="Failed to fetch details" />;
   } else if (!details.data?.transaction || !message) {
-    return <ErrorCard text="Details are not available" />;
+    return <LoadingCard />;
   }
 
   return (
