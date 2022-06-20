@@ -5,7 +5,7 @@ import {
   ParsedInstruction,
 } from "@solana/web3.js";
 import { InstructionCard } from "./InstructionCard";
-import { getProgramName } from "utils/tx";
+import { getProgramName, PROGRAM_NAMES } from "utils/tx";
 import { useCluster } from "providers/cluster";
 
 export function UnknownDetailsCard({
@@ -25,13 +25,18 @@ export function UnknownDetailsCard({
 }) {
   const { cluster } = useCluster();
   const programName = getProgramName(ix.programId.toBase58(), cluster);
+  let titleSuffix = `: Unknown Instruction`;
+  if (programName === PROGRAM_NAMES.MAGIC_EDEN) {
+    // TODO: Use actual instruction here
+    titleSuffix = '';
+  }
   return (
     <InstructionCard
       readable={readable}
       ix={ix}
       index={index}
       result={result}
-      title={`${programName}: Unknown Instruction`}
+      title={`${programName}${titleSuffix}`}
       innerCards={innerCards}
       childIndex={childIndex}
       defaultRaw

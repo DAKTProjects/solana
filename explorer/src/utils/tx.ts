@@ -22,6 +22,9 @@ import { SerumMarketRegistry } from "serumMarketRegistry";
 import { TokenInfoMap } from "@solana/spl-token-registry";
 
 export enum PROGRAM_NAMES {
+  // Magic Eden
+  MAGIC_EDEN = "Magic Eden Program",
+
   // native built-ins
   ADDRESS_MAP = "Address Map Program",
   COMPUTE_BUDGET = "Compute Budget Program",
@@ -381,6 +384,10 @@ export const PROGRAM_INFO_BY_ID: { [address: string]: ProgramInfo } = {
   },
   "5ZfZAwP2m93waazg8DkrrVmsupeiPEvaEHowiUP7UAbJ": {
     name: PROGRAM_NAMES.SOLANART_GO,
+    deployments: [Cluster.MainnetBeta],
+  },
+  M2mx93ekt1fmXSVkTrUL9xVFHkmME8HTUi5Cyc5aF7K: {
+    name: PROGRAM_NAMES.MAGIC_EDEN,
     deployments: [Cluster.MainnetBeta],
   },
 };
