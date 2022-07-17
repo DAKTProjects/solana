@@ -1,6 +1,4 @@
 import React from "react";
-import { Signature } from "components/common/Signature";
-import { Slot } from "components/common/Slot";
 import Moment from "react-moment";
 import { PublicKey } from "@solana/web3.js";
 import {
@@ -15,17 +13,18 @@ import {
 import { FetchStatus } from "providers/cache";
 import { LoadingCard } from "components/common/LoadingCard";
 import { ErrorCard } from "components/common/ErrorCard";
+import { TransactionDescription } from "components/common/TransactionDescription";
 
 export function TransactionHistoryCard({ pubkey }: { pubkey: PublicKey }) {
   const address = pubkey.toBase58();
   const history = useAccountHistory(address);
   const fetchAccountHistory = useFetchAccountHistory();
-  const refresh = () => fetchAccountHistory(pubkey, false, true);
-  const loadMore = () => fetchAccountHistory(pubkey, false);
+  const refresh = () => fetchAccountHistory(pubkey, true, true);
+  const loadMore = () => fetchAccountHistory(pubkey, true);
 
   const transactionRows = React.useMemo(() => {
     if (history?.data?.fetched) {
-      return getTransactionRows(history.data.fetched);
+      return getTransactionRows(history.data.fetched, history?.data?.transactionMap);
     }
     return [];
   }, [history]);
@@ -52,15 +51,11 @@ export function TransactionHistoryCard({ pubkey }: { pubkey: PublicKey }) {
 
   const hasTimestamps = transactionRows.some((element) => element.blockTime);
   const detailsList: React.ReactNode[] = transactionRows.map(
-    ({ slot, signature, blockTime, statusClass, statusText }) => {
+    ({ description, signature, blockTime, statusClass, statusText }) => {
       return (
         <tr key={signature}>
           <td>
-            <Signature signature={signature} link truncate />
-          </td>
-
-          <td className="w-1">
-            <Slot slot={slot} link />
+            <TransactionDescription description={description} signature={signature} link truncate />
           </td>
 
           {hasTimestamps && (
@@ -89,8 +84,7 @@ export function TransactionHistoryCard({ pubkey }: { pubkey: PublicKey }) {
         <table className="table table-sm table-nowrap card-table">
           <thead>
             <tr>
-              <th className="text-muted w-1">Transaction Signature</th>
-              <th className="text-muted w-1">Slot</th>
+              <th className="text-muted w-1">Transaction Description</th>
               {hasTimestamps && <th className="text-muted w-1">Age</th>}
               <th className="text-muted">Result</th>
             </tr>

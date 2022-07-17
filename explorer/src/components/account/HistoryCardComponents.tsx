@@ -1,5 +1,6 @@
 import React from "react";
 import { ConfirmedSignatureInfo, TransactionError } from "@solana/web3.js";
+import { TransactionMap } from "providers/accounts/history";
 
 export type TransactionRow = {
   slot: number;
@@ -9,6 +10,7 @@ export type TransactionRow = {
   statusClass: string;
   statusText: string;
   signatureInfo: ConfirmedSignatureInfo;
+  description: string;
 };
 
 export function HistoryCardHeader({
@@ -78,7 +80,8 @@ export function HistoryCardFooter({
 }
 
 export function getTransactionRows(
-  transactions: ConfirmedSignatureInfo[]
+  transactions: ConfirmedSignatureInfo[],
+  transactionMap: TransactionMap | undefined,
 ): TransactionRow[] {
   const transactionRows: TransactionRow[] = [];
   for (var i = 0; i < transactions.length; i++) {
@@ -96,9 +99,14 @@ export function getTransactionRows(
       if (slotTransaction.err) {
         statusClass = "warning";
         statusText = "Failed";
+        continue; // dont show failed transactions
       } else {
         statusClass = "success";
         statusText = "Success";
+      }
+      let description = '';
+      if (transactionMap) {
+        description = (transactionMap.get(transactions[i].signature)?.transaction as any)?.description || '';
       }
       transactionRows.push({
         slot,
@@ -108,6 +116,7 @@ export function getTransactionRows(
         statusClass,
         statusText,
         signatureInfo: slotTransaction,
+        description,
       });
     }
   }

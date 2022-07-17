@@ -5,6 +5,7 @@ import {
   TransactionSignature,
   Connection,
   ParsedConfirmedTransaction,
+  ParsedTransactionWithMeta,
 } from "@solana/web3.js";
 import { useCluster, Cluster } from "../cluster";
 import * as Cache from "providers/cache";
@@ -13,7 +14,7 @@ import { reportError } from "utils/sentry";
 
 const MAX_TRANSACTION_BATCH_SIZE = 10;
 
-type TransactionMap = Map<string, ParsedConfirmedTransaction>;
+export type TransactionMap = Map<string, ParsedConfirmedTransaction>;
 
 type AccountHistory = {
   fetched: ConfirmedSignatureInfo[];
@@ -109,9 +110,9 @@ async function fetchParsedTransactions(
       0,
       MAX_TRANSACTION_BATCH_SIZE
     );
-    const fetched = await connection.getParsedConfirmedTransactions(signatures);
+    const fetched = await connection.getParsedTransactions(signatures);
     fetched.forEach(
-      (parsed: ParsedConfirmedTransaction | null, index: number) => {
+      (parsed: ParsedTransactionWithMeta | null, index: number) => {
         if (parsed !== null) {
           transactionMap.set(signatures[index], parsed);
         }

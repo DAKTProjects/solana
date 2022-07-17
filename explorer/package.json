@@ -58,6 +58,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-dev": "NODE_ENV='development' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "format": "prettier -c \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
